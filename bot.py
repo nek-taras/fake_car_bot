@@ -29,12 +29,15 @@ def start(update: Update, context: CallbackContext) -> None:
         fr"Привіт {user.mention_markdown_v2()}\!",
         reply_markup=ForceReply(selective=True),
     )
+    update.message.reply_text("Для пошуку введіть [номер/марка авто/місто] ")
+    update.message.reply_text("Для списоку всіх машин")
+    update.message.reply_text("/list")
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
     update.message.reply_text("Для пошуку введіть [номер/марка авто/місто] ")
-    update.message.reply_text("Список всіх машин")
+    update.message.reply_text("Для списоку всіх машин")
     update.message.reply_text("/list")
 
 
