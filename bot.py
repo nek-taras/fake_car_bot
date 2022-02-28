@@ -41,15 +41,21 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def search_command(update: Update, context: CallbackContext) -> None:
     """search cars"""
     cars = search_data(update.message.text)
-    message = "\n".join([str(c) for c in cars])
-    update.message.reply_markdown_v2(message)
+    if cars:
+        message = "\n".join([str(c) for c in cars])
+    else:
+        message = "Не знайдено"
+    update.message.reply_text(message)
 
 
 def list_command(update: Update, context: CallbackContext) -> None:
     """list all cars"""
     cars = read_data()
-    message = "\n\n".join([str(c) for c in cars])
-    update.message.reply_markdown_v2(message)
+    if cars:
+        message = "\n\n".join([str(c) for c in cars])
+    else:
+        message = "Не знайдено"
+    update.message.reply_text(message)
 
 
 def main() -> None:

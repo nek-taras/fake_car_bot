@@ -42,7 +42,7 @@ class Car:
         return Car(sheet_title, name, plate_number)
 
     def __repr__(self) -> str:
-        return f"❗❗❗*{self.plate_number.upper()}*❗❗❗ \n 🚗{self.name} 📍{self.city} "
+        return f"❗❗❗{self.plate_number.upper()}❗❗❗ \n 🚗{self.name} 📍{self.city} "
 
 
 @ttl_cache(ttl=int(APP_CONFIG["TTL_CACHE_TIME"]))
@@ -65,4 +65,5 @@ def read_data() -> List[Car]:
 
 def search_data(query: str) -> List[Car]:
     cars = read_data()
-    return [c for c in cars if query.lower() in c.search_string]
+    terms = query.lower().split()
+    return [c for c in cars if all(t in c.search_string for t in terms)]
